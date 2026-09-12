@@ -82,6 +82,12 @@ pub struct Entry {
     /// the configured output
     #[setters(skip)]
     pub output: String,
+    /// EDID make for stable matching (fallback when connector name changes)
+    #[serde(default)]
+    pub output_make: Option<String>,
+    /// EDID model for stable matching
+    #[serde(default)]
+    pub output_model: Option<String>,
     /// the configured image source
     #[setters(skip)]
     pub source: Source,
@@ -127,6 +133,8 @@ impl Entry {
     pub fn new(output: String, source: Source) -> Self {
         Self {
             output,
+            output_make: None,
+            output_model: None,
             source,
             filter_by_theme: false,
             rotation_frequency: 900,
@@ -140,6 +148,8 @@ impl Entry {
     pub fn fallback() -> Self {
         Self {
             output: String::from("all"),
+            output_make: None,
+            output_model: None,
             source: Source::Path(PathBuf::from(
                 "/usr/share/backgrounds/cosmic/orion_nebula_nasa_heic0601a.jpg",
             )),

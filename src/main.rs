@@ -292,7 +292,17 @@ impl CosmicBg {
 
             let o_name = output_info.name.clone().unwrap_or_default();
             for background in &backgrounds {
-                if background.output == o_name {
+                let name_matches = background.output == o_name;
+                let edid_matches = match (
+                    &background.output_make,
+                    &background.output_model,
+                ) {
+                    (Some(make), Some(model)) => {
+                        *make == output_info.make && *model == output_info.model
+                    },
+                    _ => false,
+                };
+                if name_matches || edid_matches {
                     let mut new_wallpaper = Wallpaper::new(
                         background.clone(),
                         self.qh.clone(),
