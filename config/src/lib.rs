@@ -6,7 +6,7 @@ use cosmic_config::{Config as CosmicConfig, ConfigGet, ConfigSet};
 use derive_setters::Setters;
 use serde::{Deserialize, Serialize};
 use std::borrow::Cow;
-use std::collections::HashSet;
+use std::collections::BTreeSet;
 use std::path::PathBuf;
 
 pub const NAME: &str = "com.system76.CosmicBackground";
@@ -208,7 +208,7 @@ impl Entry {
 #[derive(Debug, Clone, PartialEq)]
 pub struct Config {
     pub same_on_all: bool,
-    pub outputs: HashSet<String>,
+    pub outputs: BTreeSet<String>,
     pub backgrounds: Vec<Entry>,
     pub default_background: Entry,
 }
@@ -217,7 +217,7 @@ impl Default for Config {
     fn default() -> Self {
         Self {
             same_on_all: true,
-            outputs: HashSet::new(),
+            outputs: BTreeSet::new(),
             backgrounds: Vec::new(),
             default_background: Entry::fallback(),
         }
