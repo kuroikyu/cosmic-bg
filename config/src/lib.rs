@@ -76,7 +76,6 @@ impl Context {
 }
 
 #[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Setters)]
-#[serde(deny_unknown_fields)]
 #[must_use]
 pub struct Entry {
     /// the configured output
